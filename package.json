@@ -1,0 +1,22 @@
+{
+    "name": "prisma-test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "latest": "npm i @prisma/cli@dev && npm i @prisma/client@dev",
+        "prismation": "npx prisma generate && npx prisma migrate save --experimental && npx prisma migrate up --experimental"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@prisma/cli": "^2.6.0-dev.58",
+        "ts-node": "^8.6.2",
+        "typescript": "^3.8.3"
+    },
+    "dependencies": {
+        "@prisma/client": "^2.6.0-dev.58"
+    }
+}
