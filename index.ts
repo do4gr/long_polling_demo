@@ -1,40 +1,38 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 // you can do stuff in the client constructor
 // const prisma = new PrismaClient({
 //   __internal: { enginePath: '/Users/matthias/repos/work/prisma-engine/target/debug/query-engine' }
 // } as any )
 
-
-// you can do middlewares on 
+// you can do middlewares on
 // prisma.$use
 
-
 async function populate() {
-  await prisma.simple.create({
+  await prisma.a.create({
     data: {
-      id: 6,
-      name: "Simple 1"
-    }
+      id: 1,
+      name: "a1",
+      a: "a",
+      b: "b",
+    },
   });
-  await prisma.simple.create({
+
+  await prisma.b.create({
     data: {
-      id: 7,
-      name: "Simple 2"
-    }
+      a: "a",
+      b: "b",
+      A: { connect: { id: 1 } },
+    },
   });
 }
 
 async function test() {
-  const s = (await prisma.simple.findMany({
-    where: { name: {startsWith: "Simple"}} }
-  ));
-  
-  console.log(s[1]);
-  console.log(s[2]);
-  
+  const s = await prisma.a.findMany();
+
+  console.log(s[0]);
 }
 
 async function main() {
@@ -43,7 +41,7 @@ async function main() {
 }
 
 main()
-  .catch(e => console.error(e))
+  .catch((e) => console.error(e))
   .finally(async () => {
-    await prisma.disconnect()
-  })
+    await prisma.$disconnect;
+  });
