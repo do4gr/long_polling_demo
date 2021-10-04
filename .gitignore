@@ -103,5 +103,5 @@ dist
 .tern-port
 
 # Prisma 
-.migrations/
+migrations/
 

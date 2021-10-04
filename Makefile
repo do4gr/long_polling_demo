@@ -1,11 +1,6 @@
+
 all-dbs:
 	docker-compose -f docker-compose.yml up  -d --remove-orphans
-
-start-sqlite:
-
-dev-sqlite:
-	echo 'sqlite' > current_connector
-	cp $(CONFIG_PATH)/sqlite $(CONFIG_FILE)
 
 start-postgres9:
 	docker-compose -f docker-compose.yml up -d --remove-orphans postgres9
@@ -78,6 +73,21 @@ start-mysql_mariadb:
 dev-mariadb: start-mysql_mariadb
 	echo 'mariadb' > current_connector
 	cp $(CONFIG_PATH)/mariadb $(CONFIG_FILE)
+
+dev-mssql2019:
+	docker-compose -f docker-compose.yml up -d --remove-orphans mssql-2019
+	echo 'mssql2019' > current_connector
+	cp $(CONFIG_PATH)/sqlserver2019 $(CONFIG_FILE)
+
+dev-mssql2017:
+	docker-compose -f docker-compose.yml up -d --remove-orphans mssql-2017
+	echo 'mssql2017' > current_connector
+	cp $(CONFIG_PATH)/sqlserver2017 $(CONFIG_FILE)
+
+dev-mongodb:
+	docker-compose -f docker-compose.yml up -d --remove-orphans mongo4
+	echo 'mongodb' > current_connector
+	cp $(CONFIG_PATH)/mongodb4 $(CONFIG_FILE)
 
 start-mssql_2019:
 	docker-compose -f docker-compose.yml up -d --remove-orphans mssql-2019
