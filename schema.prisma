@@ -1,25 +1,19 @@
 datasource db {
-  url      = env("DATABASE_URL")
-  // provider = env("PROVIDER")
   provider = "postgresql"
-}
-
-generator client {
-  provider = "prisma-client-js"
-    binaryTargets = ["darwin"]
-}
-
-model Simple {
-  id              Int        @id
-  name     String?
-  does_not_exist String?
+  url      = "postgres://postgres:prisma@localhost:5432/postgres"
 }
 
 
-//relations
 
-//json
 
-//arrays
 
-//native types
+model Blog {
+  id             Int     @id
+  title          String?
+  posts          Post[]
+}
+
+model Post {
+  id              Int @id
+  blog            Blog 
+}
