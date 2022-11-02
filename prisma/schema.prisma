@@ -1,0 +1,39 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["darwin"]
+  // previewFeatures = ["subscriptions"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  username  String    @unique
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now()) //@createdAt
+  chats     Chat[]
+  messages  Message[]
+}
+
+model Chat {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  updatedAt DateTime  @updatedAt
+  createdAt DateTime  @default(now()) //@createdAt 
+  users     User[]
+  messages  Message[]
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  content   String
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) //@createdAt 
+  chatId    Int
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  authorId  Int
+  author    User     @relation(fields: [authorId], references: [id])
+}

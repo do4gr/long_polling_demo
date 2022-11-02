@@ -1,13 +1,11 @@
-# local_debug
+// Demo part
+npx run start-dbs
+npx prisma db push
+npx prisma db seed
+npx run start-prisma-sub
+-> start frontend app
+npx prisma studio (showing and subscribed to messages)
+-> change data see live changes
 
-Setup for local debugging of engines
-
-Relevant commands `npm run`:
-- "latest": "npm i prisma@dev && npm i @prisma/client@dev",
-- "archive": "mv ./migrations ./migrations_archive",
-- "test": "ts-node index.ts",
-- "reset": "npx prisma migrate reset --force",
-- "start-dbs": "docker-compose up -d"
-
-Makefile contains commands to spin up dbs in docker.
-.env file contains env vars to link custom binaries and also the db credentials.
+// Exploring part?
+let them play around with the frontend app code and the subscriptions
